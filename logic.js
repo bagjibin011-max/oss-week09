@@ -10,11 +10,20 @@
 // 커밋 메시지: p3: rows / p4: rule / p7: reasons
 
 export function toDays(daily) {
-return daily.time.map((date, i) => ({
-date : date,
-max: daily.temperature_2m_max[i],
-wind: daily.wind_speed_10m_max[i],
-rain: daily.precipitation_probability_max[i],
+    return daily.time.map((date, i) => ({
+    date : date,
+    max: daily.temperature_2m_max[i],
+    wind: daily.wind_speed_10m_max[i],
+    rain: daily.precipitation_probability_max[i],
 
-}));
+    }));
+}
+
+export function isGoodDay(day, limits) {
+    return day.rain <= limits.rain && day.wind <= limits.wind;
+}
+
+export function summarize(days, limits) {
+    const good = days.filter((day) => isGoodDay(day, limits));
+    return `good for a run on ${good.length} of ${days.length} days`;
 }
