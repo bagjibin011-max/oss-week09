@@ -84,3 +84,19 @@ function render() {
     rowsEl.replaceChildren(...state.days.map(dayRow));
 }
 
+rainInput.addEventListener("input", () => {
+    state.limits = {
+        rain: Number(rainInput.value),
+        wind: Number(windInput.value)
+    };
+    render();
+});
+
+windInput.addEventListener("input", () => {
+    state.limits = {
+        rain: Number(rainInput.value),
+        wind: Number(windInput.value)
+    };
+    render();
+});
+
